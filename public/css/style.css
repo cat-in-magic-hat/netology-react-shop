@@ -564,3 +564,14 @@ h2, .h2 {
   background-color: #727e86;
   border-color: #727e86;
 }
+
+/*cards fix*/
+.top-sales .row > div,
+.catalog .row > div {
+  margin-bottom: 5px;
+}
+
+.top-sales .card,
+.catalog .card {
+  height: 100%;
+}
