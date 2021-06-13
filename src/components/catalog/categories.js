@@ -1,27 +1,36 @@
-import { useState, useEffect } from 'react';
-import { ProductsService } from '../../services';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { categoriesRequest, setActiveCategory } from '../../actions/categories-action-creators';
 
 export default function Categories() {
-    let [categories, setCategories] = useState(null);
+    const { items: categories, loading, error, selected } = useSelector(state => state.categories);
+    const dispatch = useDispatch();
 
     useEffect(() => {        
-        ProductsService.getCategories()
-            .then(res => setCategories(res))
-            .catch(err => {
-                console.log(err);
-            })
-    }, []);
-    if (!categories) return null;
+        dispatch(categoriesRequest());
+    }, [dispatch]);
+
+    const selectCategory = (e, id) => {
+        e.preventDefault();
+        dispatch(setActiveCategory(id));
+    }
+
+    if (!categories || loading || error) return null;
     return (
         <ul className="catalog-categories nav justify-content-center">
-            <li key="all" className="nav-item">
-                <a className="nav-link active" href="#">Все</a>
-            </li>
             { categories.map(({ title, id }) =>
                 <li key={id} className="nav-item">
-                    <a className="nav-link" href="#">{title}</a>
+                    <a className={getClassList(id, selected)}
+                        href="#"
+                        onClick={(e) => selectCategory(e, id)}>{title}</a>
                 </li>
             )}
         </ul>
     )
+}
+
+function getClassList(id, selectedCategoryId) {
+    return id === selectedCategoryId
+        ? 'nav-link active'
+        : 'nav-link';
 }

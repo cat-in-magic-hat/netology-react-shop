@@ -6,7 +6,7 @@ export default function ContentWrapper({ children }) {
         <main className="container">
             <div className="row">
                 <div className="col">
-                    <MainBanner {...mainBanner}/>
+                    <MainBanner {...mainBanner} />
                     {children}
                 </div>
             </div>

@@ -575,3 +575,14 @@ h2, .h2 {
 .catalog .card {
   height: 100%;
 }
+
+/*errors*/
+.api-error {
+  width: 100%;
+  text-align: center;
+}
+
+/*banners*/
+.banner {
+  min-height: 250px;
+}
