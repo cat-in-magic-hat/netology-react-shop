@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { changeSearchForm, fetchShoesAccordingToSearch } from '../../actions/action-creators';
+import { changeSearchForm } from '../../actions/shoes-action-creators';
+import { pageUrls } from '../../navigation';
 import CartIcon from './cart-icon';
 
 export default function HeaderControls() {
@@ -12,14 +13,13 @@ export default function HeaderControls() {
 
     const executeShoesSearch = () => {
         if (search) {
-            history.push('/catalog');
+            history.push(pageUrls.catalog);
             dispatch(changeSearchForm(search));
-            dispatch(fetchShoesAccordingToSearch(search));
             setIsSearchActive(false);
             setSearch('');
         }
     }
-    const toggleSearch = (e) => {
+    const toggleSearch = e => {
         e.preventDefault();
         if (!isSearchActive || !search) {
             setIsSearchActive(!isSearchActive);
@@ -27,7 +27,7 @@ export default function HeaderControls() {
             executeShoesSearch();
         }
     }
-    const onSearchSubmit = (e) => {
+    const onSearchSubmit = e => {
         e.preventDefault();
         if (search) executeShoesSearch();
     }

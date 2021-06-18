@@ -586,3 +586,8 @@ h2, .h2 {
 .banner {
   min-height: 250px;
 }
+
+/*product page*/
+.catalog-item-size {
+  cursor: pointer;
+}

@@ -3,16 +3,25 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import {
   shoesReducer,
   bestsellersReducer,
+  cartReducer,
   categoriesReducer,
   shoesDetailsReducer,
   shoesQueryReducer,
   searchFormReducer
 } from '../reducers';
-import { bestsellersEpic, categoriesEpic, applyCategoryForSearchEpic, searchShoesEpic, shoesDetailsEpic } from '../epics';
+import {
+  bestsellersEpic,
+  categoriesEpic,
+  applyCategoryForSearchEpic,
+  searchShoesEpic,
+  searchChangedEpic,
+  shoesDetailsEpic
+} from '../epics';
 
 const reducer = combineReducers({
   shoes: shoesReducer,
   bestsellers: bestsellersReducer,
+  cart: cartReducer,
   categories: categoriesReducer,
   shoesDetails: shoesDetailsReducer,
   shoesQuery: shoesQueryReducer,
@@ -26,6 +35,7 @@ const epic = combineEpics(
   categoriesEpic,
   applyCategoryForSearchEpic,
   searchShoesEpic,
+  searchChangedEpic,
   shoesDetailsEpic
 );
 

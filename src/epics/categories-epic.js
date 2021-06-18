@@ -1,10 +1,10 @@
-import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import { of } from 'rxjs';
+import { ofType } from 'redux-observable';
 import { map, retry, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
 import { CATEGORIES_REQUEST, SET_ACTIVE_CATEGORY } from '../actions/action-types';
 import { categoriesSuccess, categoriesFailure } from '../actions/categories-action-creators';
-import { fetchShoesForCategory } from '../actions/action-creators';
+import { fetchShoesForCategory } from '../actions/shoes-action-creators';
 import { DEAFULT_RETRY_AMOUNT, CATEGORIES_URL } from './settings';
 
 export const categoriesEpic = action$ => action$.pipe(

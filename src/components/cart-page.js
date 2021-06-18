@@ -1,17 +1,25 @@
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart } from '../actions/cart-action-creators';
 import { getProductUrl } from '../navigation';
-import { cart } from '../data/fake';
 
 const CART_EMPTY_TEXT = 'Ваша корзина пуста';
 const tableHeader = getTableHeader();
 
 export default function CartPage() {
-    const { items, total } = cart;
+    const { items, getTotal } = useSelector(state => state.cart);
+    const dispatch = useDispatch();
+    const isCartEmpty = !items.length;
+
+    const onRemove = id => {
+        dispatch(removeFromCart(id));
+    }
+
     return (
         <section className="cart">
             <h2 className="text-center">Корзина</h2>
-            { !items && <div>{CART_EMPTY_TEXT}</div>}
-            { items && 
+            { isCartEmpty && <div>{CART_EMPTY_TEXT}</div>}
+            { !isCartEmpty && 
                 <table className="table table-bordered">
                     { tableHeader }
                     <tbody>
@@ -23,12 +31,12 @@ export default function CartPage() {
                                 <td>{amount}</td>
                                 <td>{price} руб.</td>
                                 <td>{price * amount} руб.</td>
-                                <td><button className="btn btn-outline-danger btn-sm">Удалить</button></td>
+                                <td><button className="btn btn-outline-danger btn-sm" onClick={() => onRemove(id)}>Удалить</button></td>
                             </tr>
                             )}
                         <tr>
                             <td colSpan="5" className="text-right">Общая стоимость</td>
-                            <td>{ total } руб.</td>
+                            <td>{ getTotal() } руб.</td>
                         </tr>
                     </tbody>
                 </table>

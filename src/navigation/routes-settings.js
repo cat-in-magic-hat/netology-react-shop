@@ -72,11 +72,3 @@ export const footerMenuItems = routesSettings
     .filter(({ showInFooter }) => showInFooter)
     .sort(sortByOrder)
     .map(({ path, title }) => ({ path, title }));
-
-
-
-export default {
-    headerMenuItems,
-    footerMenuItems,
-    routes
-}

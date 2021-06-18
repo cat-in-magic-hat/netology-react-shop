@@ -1,7 +1,7 @@
 import {
-    SEARCH_SHOES_REQUEST,
-    SEARCH_SHOES_FAILURE,
-    SEARCH_SHOES_SUCCESS,
+    FETCH_SHOES_REQUEST,
+    FETCH_SHOES_FAILURE,
+    FETCH_SHOES_SUCCESS,
 } from '../actions/action-types';
 
 const initialState = {
@@ -13,13 +13,15 @@ const initialState = {
 
 export default function shoesReducer(state = initialState, action) {
     switch (action.type) {
-        case SEARCH_SHOES_REQUEST:
+        case FETCH_SHOES_REQUEST:
+            const { append } = action.payload;
             return {
                 ...state,
+                items: append ? state.items : [],
                 loading: true,
                 error: null
             };
-        case SEARCH_SHOES_FAILURE:
+        case FETCH_SHOES_FAILURE:
             const { error } = action.payload;
             return {
                 ...state,
@@ -27,11 +29,11 @@ export default function shoesReducer(state = initialState, action) {
                 hasMore: false,
                 error,
             };
-        case SEARCH_SHOES_SUCCESS:
-            const { items, hasMore, appendToPrevious } = action.payload;
+        case FETCH_SHOES_SUCCESS:
+            const { items, hasMore } = action.payload;
             return {
                 ...state,
-                items: appendToPrevious ? [...state.items, ...items] : [...items],
+                items: [...state.items, ...items],
                 loading: false,
                 error: null,
                 hasMore

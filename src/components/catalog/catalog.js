@@ -1,39 +1,38 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { resetShoesQuery, fetchShoesNextPage } from '../../actions/action-creators';
-import WidgetWrapper from '../widget-wrapper';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchShoesNextPage } from '../../actions/shoes-action-creators';
+import { Error, Loader } from '../shared';
 import ProductCard from './product-card';
 
 const NO_PRODUCTS_TEXT = 'К сожалению, по Вашему запросу ничего не найдено';
 
-export default function Catalog() {
-    const { items: products, loading, error, hasMore } = useSelector(state => state.shoes);
+export default function Catalog({ items, loading, error, hasMore }) {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(resetShoesQuery());
-    }, [dispatch]);
+    const showLoadMoreButton = !error && !(loading && items.length === 0) && hasMore;
+    const noResults = items.length === 0 && !loading;
 
-    const showLoadMoreButton = !error && hasMore;
-    const hasResults = products.length > 0;
-
-    const loadNext = (e) => {
+    const loadNext = e => {
         e.preventDefault();
         dispatch(fetchShoesNextPage());
     }
+    if (error) {
+        return <Error error={error} />
+    }
     return (
-        <WidgetWrapper error={error} loading={loading}>
+        <>
             <div className="row">
-                {hasResults && products.map(item =>
+                {items.map(item =>
                     <div key={item.id} className="col-4"><ProductCard {...item} /></div>
                 )}
-                {!hasResults && <div className="col-12">{NO_PRODUCTS_TEXT}</div>}
+                {noResults && <div className="col-12">{NO_PRODUCTS_TEXT}</div>}
             </div>
-            { showLoadMoreButton &&
+            {loading && <Loader />}
+            {showLoadMoreButton &&
                 <div className="text-center">
                     <button className="btn btn-outline-primary" disabled={loading} onClick={loadNext}>Загрузить ещё</button>
-                </div> 
+                </div>
             }
-        </WidgetWrapper>
+        </>
     );
 }

@@ -5,20 +5,22 @@ import ProductCard from './product-card';
 import WidgetWrapper from '../widget-wrapper';
 
 export default function Bestsellers() {
-    const { items: topSales, loading, error } = useSelector(state => state.bestsellers);
+    const { items, loading } = useSelector(state => state.bestsellers);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(bestsellersRequest());
     }, [dispatch]);
 
-    if (!topSales) return null;
+    if (!loading && !items.length) {
+        return null;
+    }
     return (
         <section className="top-sales">
             <h2 className="text-center">Хиты продаж!</h2>
             <div className="row">
-                <WidgetWrapper error={error} loading={loading}>
-                    {topSales.map(item =>
+                <WidgetWrapper loading={loading}>
+                    {items.map(item =>
                         <div key={item.id} className="col-4"><ProductCard {...item} /></div>
                     )}
                 </WidgetWrapper>

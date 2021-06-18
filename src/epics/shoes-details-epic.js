@@ -3,7 +3,7 @@ import { ajax } from 'rxjs/ajax';
 import { of } from 'rxjs';
 import { map, retry, switchMap, catchError } from 'rxjs/operators';
 import { FETCH_SHOES_DETAILS_REQUEST } from '../actions/action-types';
-import { fetchShoesDetailsSuccess, fetchShoesDetailsFailure } from '../actions/action-creators';
+import { fetchShoesDetailsSuccess, fetchShoesDetailsFailure } from '../actions/shoes-action-creators';
 import { DEAFULT_RETRY_AMOUNT, PRODUCTS_LIST_URL } from './settings';
 
 export const shoesDetailsEpic = action$ => action$.pipe(

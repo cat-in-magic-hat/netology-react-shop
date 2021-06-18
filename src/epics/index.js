@@ -1,6 +1,6 @@
 import { bestsellersEpic } from './bestsellers-epic';
 import { categoriesEpic, applyCategoryForSearchEpic } from './categories-epic';
-import { searchShoesEpic } from './search-shoes-epic';
+import { searchShoesEpic, searchChangedEpic } from './search-shoes-epic';
 import { shoesDetailsEpic } from './shoes-details-epic';
 
 export {
@@ -8,5 +8,6 @@ export {
     categoriesEpic,
     applyCategoryForSearchEpic,
     searchShoesEpic,
+    searchChangedEpic,
     shoesDetailsEpic
 }

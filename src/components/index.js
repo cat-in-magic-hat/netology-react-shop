@@ -6,7 +6,6 @@ import MainPage from './main-page';
 import NotFoundPage from './not-found-page';
 import ContentWrapper from './content-wrapper';
 import ProductPage from './product-page';
-import Loader from './loader';
 
 export {
     AboutPage,
@@ -16,6 +15,5 @@ export {
     ContactsPage,
     MainPage,
     NotFoundPage,
-    ContentWrapper,
-    Loader
+    ContentWrapper
 }

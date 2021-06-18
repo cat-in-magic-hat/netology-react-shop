@@ -1,4 +1,5 @@
 import bestsellersReducer from './bestsellers';
+import cartReducer from './cart';
 import categoriesReducer from './categories';
 import shoesReducer from './shoes';
 import shoesDetailsReducer from './shoes-details';
@@ -7,6 +8,7 @@ import searchFormReducer from './search-form';
 
 export {
     bestsellersReducer,
+    cartReducer,
     categoriesReducer,
     shoesReducer,
     shoesDetailsReducer,
