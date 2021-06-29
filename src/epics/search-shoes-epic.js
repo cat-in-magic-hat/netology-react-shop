@@ -16,7 +16,7 @@ const buildSearchParams = (page, search, category) => {
 };
 
 const checkIfHasMore = items => {
-    return items && items.length == DEFAULT_SHOES_PER_PAGE_AMOUNT;
+    return items && items.length === DEFAULT_SHOES_PER_PAGE_AMOUNT;
 };
 
 const shouldAppendNewResultsToPrevious = (prev, current) => {

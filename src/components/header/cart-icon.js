@@ -4,7 +4,7 @@ import { pageUrls } from '../../navigation';
 
 export default function CartIcon() {
     const { items } = useSelector(state => state.cart);
-    const productPositionsAmount = items && items.length || 0;
+    const productPositionsAmount = items && items.length;
     return (
         <NavLink to={pageUrls.cart}>
             <div className="header-controls-pic header-controls-cart">

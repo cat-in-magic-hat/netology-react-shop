@@ -29,11 +29,11 @@ export default function ProductPage({ match }) {
 
     useEffect(() => {
         dispatch(fetchShoesDetailsRequest(productId));
-    }, [dispatch]);
+    }, [dispatch, productId]);
 
     const characteristics = buildCharacteristicsTable(product);
     const { title, images, sizes, price } = product;
-    const availableSizes = sizes && sizes.filter(({ avalible }) => avalible) || [];
+    const availableSizes = sizes && sizes.filter(({ avalible }) => avalible);
 
     const increaseAmount = () => setAmount(++amount);
     const decreaseAmount = () => setAmount(--amount);
