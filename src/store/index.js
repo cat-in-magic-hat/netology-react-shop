@@ -8,13 +8,15 @@ import {
   orderReducer,
   shoesDetailsReducer,
   shoesQueryReducer,
-  searchFormReducer
+  searchFormReducer,
+  popupReducer
 } from '../reducers';
 import {
   bestsellersEpic,
   categoriesEpic,
   applyCategoryForSearchEpic,
   orderEpic,
+  showPopupEpic,
   clearCartEpic,
   searchShoesEpic,
   searchChangedEpic,
@@ -30,6 +32,7 @@ const reducer = combineReducers({
   shoesDetails: shoesDetailsReducer,
   shoesQuery: shoesQueryReducer,
   searchForm: searchFormReducer,
+  popup: popupReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -39,6 +42,7 @@ const epic = combineEpics(
   categoriesEpic,
   applyCategoryForSearchEpic,
   orderEpic,
+  showPopupEpic,
   clearCartEpic,
   searchShoesEpic,
   searchChangedEpic,
