@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InputMask from 'react-input-mask';
 import { createOrder } from '../../actions/order-action-creators';
 import { Loader } from '../shared';
+
+const phoneMask = "(999) 999-99-99";
+const isPhoneValid = (phone) => /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phone);
 
 const formCardStyle = {
     maxWidth: '30rem',
@@ -17,7 +21,7 @@ export default function OrderForm() {
         'agreement': false,
     });
 
-    const handleInput = ({ target }) => {
+    const handleChange = ({ target }) => {
         setForm({ ...form, [target.name]: target.value });
     }
     const toggleAgreement = () => {
@@ -27,9 +31,9 @@ export default function OrderForm() {
     const submit = (e) => {
         e.preventDefault();
         const { phone, address } = form;
-        dispatch(createOrder(phone, address));
+        dispatch(createOrder(`+7${phone.replace(/[^\d]/gi, '')}`, address));
     }
-    const isDisabled = !form.phone || !form.address || !form.agreement || loading;
+    const isDisabled = loading || !form.address || !form.agreement || !isPhoneValid(form.phone);
 
     return (
     <section className="order">
@@ -39,13 +43,13 @@ export default function OrderForm() {
             <form className="card-body">
                 <div className="form-group">
                     <label htmlFor="phone">Телефон</label>
-                    <input className="form-control" name="phone" placeholder="Ваш телефон" 
-                        value={form.phone} onInput={handleInput} disabled={loading}/>
+                    <InputMask className="form-control" name="phone" placeholder="Ваш телефон" 
+                        value={form.phone} onChange={handleChange} disabled={loading} mask={phoneMask}></InputMask>
                 </div>
                 <div className="form-group">
                     <label htmlFor="address">Адрес доставки</label>
                     <input className="form-control" name="address" placeholder="Адрес доставки" 
-                        value={form.address} onInput={handleInput} disabled={loading}/>
+                        value={form.address} onInput={handleChange} disabled={loading}/>
                 </div>
                 <div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" name="agreement"
