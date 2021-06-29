@@ -5,6 +5,7 @@ import {
   bestsellersReducer,
   cartReducer,
   categoriesReducer,
+  orderReducer,
   shoesDetailsReducer,
   shoesQueryReducer,
   searchFormReducer
@@ -13,6 +14,8 @@ import {
   bestsellersEpic,
   categoriesEpic,
   applyCategoryForSearchEpic,
+  orderEpic,
+  clearCartEpic,
   searchShoesEpic,
   searchChangedEpic,
   shoesDetailsEpic
@@ -22,6 +25,7 @@ const reducer = combineReducers({
   shoes: shoesReducer,
   bestsellers: bestsellersReducer,
   cart: cartReducer,
+  order: orderReducer,
   categories: categoriesReducer,
   shoesDetails: shoesDetailsReducer,
   shoesQuery: shoesQueryReducer,
@@ -34,6 +38,8 @@ const epic = combineEpics(
   bestsellersEpic,
   categoriesEpic,
   applyCategoryForSearchEpic,
+  orderEpic,
+  clearCartEpic,
   searchShoesEpic,
   searchChangedEpic,
   shoesDetailsEpic

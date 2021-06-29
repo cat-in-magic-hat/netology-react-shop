@@ -1,6 +1,7 @@
 import {
     ADD_TO_CART,
     REMOVE_FROM_CART,
+    CLEAR_CART
 } from '../actions/action-types';
 
 const LOCAL_STORAGE_KEY = 'bosa-noga-cart';
@@ -13,6 +14,10 @@ function Cart(items) {
 
 const saveToLocalStorage = items => {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
+}
+
+const clearStorage = () => {
+    window.localStorage.removeItem(LOCAL_STORAGE_KEY);
 }
 
 const loadFromLocalStorage = () => {
@@ -29,20 +34,23 @@ export default function cartReducer(state = initialState, action) {
             const existingItem = state.items.find(({ id: existingId, size: existingSize }) => id === existingId && size === existingSize);
             const updatedItems = !existingItem
                 ? [...state.items, { id, title, size, amount, price }]
-                : [...state.items.filter(x => x !== existingItem), { 
+                : [...state.items.filter(x => x !== existingItem), {
                     id,
                     title,
                     size,
                     amount: amount + existingItem.amount,
-                    price: price + existingItem.price }
-                ];
-            saveToLocalStorage(updatedItems);            
+                    price: price + existingItem.price
+                }];
+            saveToLocalStorage(updatedItems);
             return new Cart(updatedItems);
         case REMOVE_FROM_CART:
             const { id: productForRemoving } = action.payload;
             const items = state.items.filter(({ id }) => id !== productForRemoving);
             saveToLocalStorage(items);
             return new Cart(items);
+        case CLEAR_CART:
+            clearStorage();
+            return new Cart([]);
         default:
             return state;
     }

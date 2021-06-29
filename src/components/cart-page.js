@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart } from '../actions/cart-action-creators';
 import { getProductUrl } from '../navigation';
+import OrderForm from './order/order-form';
 
 const CART_EMPTY_TEXT = 'Ваша корзина пуста';
 const tableHeader = getTableHeader();
@@ -20,7 +21,7 @@ export default function CartPage() {
             <h2 className="text-center">Корзина</h2>
             { isCartEmpty && <div>{CART_EMPTY_TEXT}</div>}
             { !isCartEmpty && 
-                <table className="table table-bordered">
+                <><table className="table table-bordered">
                     { tableHeader }
                     <tbody>
                         { items.map(({id, price, size, amount, title}, index) => 
@@ -40,6 +41,8 @@ export default function CartPage() {
                         </tr>
                     </tbody>
                 </table>
+                <OrderForm />
+                </>
             }
         </section>
     );

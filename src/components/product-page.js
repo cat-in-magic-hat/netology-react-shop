@@ -21,7 +21,7 @@ const MAX_AVAILABLE_AMOUNT = 10;
 
 export default function ProductPage({ match }) {
     const history = useHistory();
-    const productId = match.params.id;
+    const productId = +match.params.id;
     const { item: product, loading, error } = useSelector(state => state.shoesDetails);
     let [amount, setAmount] = useState(INITIAL_AMOUNT);
     let [selectedSize, setSelectedSize] = useState(null);

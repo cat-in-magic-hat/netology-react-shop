@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { pageUrls } from '../../navigation';
 
 export default function CartIcon() {
-    const { items: { length: productPositionsAmount } } = useSelector(state => state.cart);
+    const { items } = useSelector(state => state.cart);
+    const productPositionsAmount = items && items.length || 0;
     return (
         <NavLink to={pageUrls.cart}>
             <div className="header-controls-pic header-controls-cart">
