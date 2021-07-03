@@ -6,6 +6,9 @@ import MainPage from './main-page';
 import NotFoundPage from './not-found-page';
 import ContentWrapper from './content-wrapper';
 import ProductPage from './product-page';
+import { Footer } from './footer';
+import { Header } from './header';
+import { Popup } from './shared';
 
 export {
     AboutPage,
@@ -15,5 +18,8 @@ export {
     ContactsPage,
     MainPage,
     NotFoundPage,
-    ContentWrapper
+    ContentWrapper,
+    Footer,
+    Header,
+    Popup
 }

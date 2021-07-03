@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import Menu from '../menu';
 import HeaderControls from './header-controls';
+import { headerMenuItems } from '../../navigation';
 
-export default function Header({ menuItems }) {
+export default function Header() {
     return (
         <header className="container">
             <div className="row">
@@ -13,7 +14,7 @@ export default function Header({ menuItems }) {
                         </NavLink>
 
                         <div className="collapase navbar-collapse" id="navbarMain">
-                            <Menu items={menuItems}/>
+                            <Menu items={headerMenuItems}/>
                             <HeaderControls/>
                         </div>
                     </nav>

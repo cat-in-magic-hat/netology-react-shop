@@ -1,19 +1,16 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import { Footer, Contacts, PaymentMethods, Copyright, FooterMenu } from './components/footer';
-import { Header } from './components/header';
-import { Popup } from './components/shared';
-import { ContentWrapper } from './components';
-import { storeContacts, paymentMethods } from './data';
-import { headerMenuItems, footerMenuItems, routes } from './navigation';
+import { Footer } from './components/footer';
+import { ContentWrapper, Popup, Header } from './components';
+import { routes } from './navigation';
 
 function App() {
   return (
     <>
       <Provider store={store}>
         <Router>
-          <Header menuItems={headerMenuItems} />
+          <Header/>
           <ContentWrapper>
             <Switch>
               {routes.map(({ path, component }) =>
@@ -21,16 +18,9 @@ function App() {
               )}
             </Switch>
           </ContentWrapper>
-          <Footer>
-            <FooterMenu items={footerMenuItems} />
-            <>
-              <PaymentMethods methods={paymentMethods} />
-              <Copyright />
-            </>
-            <Contacts {...storeContacts} />
-          </Footer>
+          <Footer/>
         </Router>
-      <Popup/>
+        <Popup/>
       </Provider>
     </>
   );

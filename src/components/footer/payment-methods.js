@@ -1,10 +1,11 @@
-export default function PaymentMethods({ methods }) {
-    if (!methods) return null;
+import { paymentMethods } from '../../data';
+
+export default function PaymentMethods() {
     return (
         <section>
             <h5>Принимаем к оплате:</h5>
             <div className="footer-pay">
-                { methods.sort((x, y) => x.sortOrder - y.sortOrder).map(({ alias }) => 
+                { paymentMethods.sort((x, y) => x.sortOrder - y.sortOrder).map(({ alias }) => 
                     <div key={alias} className={getClassName(alias)}></div>
                 )}
             </div>
