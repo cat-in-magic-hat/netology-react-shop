@@ -33,7 +33,7 @@ export default function ProductPage({ match }) {
 
     const characteristics = buildCharacteristicsTable(product);
     const { title, images, sizes, price } = product;
-    const availableSizes = sizes && sizes.filter(({ avalible }) => avalible);
+    const availableSizes = sizes && sizes.filter(({ avalible }) => avalible) || [];
 
     const increaseAmount = () => setAmount(++amount);
     const decreaseAmount = () => setAmount(--amount);
